@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saransh Lakra - Web Developer</title>
+    <title>Saransh Lakra - Full-Stack Web Developer</title>
     <style>
         /* Modern CSS Reset and Variables */
         :root {
@@ -11,6 +11,7 @@
             --secondary: #3498db;
             --accent: #e74c3c;
             --security: #27ae60;
+            --microsoft: #0078d4;
             --light: #ecf0f1;
             --dark: #2c3e50;
             --gray: #7f8c8d;
@@ -31,7 +32,7 @@
         }
         
         .resume-container {
-            max-width: 210mm;
+            max-width: 90%;
             min-height: 297mm;
             margin: 20px auto;
             background: white;
@@ -52,7 +53,6 @@
         }
         
         .name-title h1 {
-		    width: max-content  !important;
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
         }
@@ -124,6 +124,10 @@
             background: var(--security);
         }
         
+        .microsoft-item {
+            background: var(--microsoft);
+        }
+        
         /* Experience Timeline */
         .experience-item {
             margin-bottom: 1.5rem;
@@ -187,22 +191,174 @@
         }
         
         /* Hobbies Section */
-        .hobby-item {
-            background: var(--light);
-            padding: 0.8rem;
-            border-radius: 8px;
-            margin-bottom: 0.8rem;
-            border-left: 4px solid var(--secondary);
+        .hobbies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
-        .hobby-title {
+        .hobby-item {
+            background: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--secondary);
+        }
+        
+        /* Games Section */
+        .games-section {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 2px dashed var(--secondary);
+        }
+        
+        .game-tabs {
+            display: flex;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .game-tab {
+            flex: 1;
+            text-align: center;
+            padding: 8px;
+            cursor: pointer;
+            background: #f8f9fa;
+            border: none;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+        
+        .game-tab.active {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .game-content {
+            display: none;
+        }
+        
+        .game-content.active {
+            display: block;
+        }
+        
+        /* Game Styles */
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4px;
+            margin: 10px 0;
+        }
+
+        .game-cell {
+            background: #f5f5f5;  /* Light gray background */
+            border: 2px solid #757575;  /* Gray border */
+            color: #424242;  /* Dark gray for X/O */
             font-weight: bold;
+            width: 100%;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        .game-cell:hover {
+            background: #e0e0e0;
+            transform: scale(1.05);
+        }
+        
+        .game-status {
+            text-align: center;
+            margin: 10px 0;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .game-controls {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        
+        .game-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        /* Memory Game */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin: 10px 0;
+        }
+        
+        .memory-card {
+            width: 100%;
+            aspect-ratio: 1;
+            background: var(--secondary);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 14px;
+            color: white;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+            background: white;
             color: var(--primary);
         }
         
-        .hobby-description {
-            color: var(--gray);
-            font-size: 0.9rem;
+        .memory-card.matched {
+            background: var(--security);
+            transform: scale(0.9);
+        }
+        
+        /* Color Picker */
+        .color-picker {
+            text-align: center;
+        }
+        
+        .color-display {
+            width: 100%;
+            height: 80px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 2px solid #ddd;
+        }
+        
+        .color-sliders {
+            margin: 10px 0;
+        }
+        
+        .color-slider {
+            width: 100%;
+            margin: 5px 0;
+        }
+        
+        .color-value {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 5px;
+            border-radius: 4px;
+            margin-top: 10px;
+            font-size: 0.8rem;
         }
         
         /* Print Styles */
@@ -215,6 +371,22 @@
                 margin: 0;
                 max-width: 100%;
             }
+            .games-section {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .resume-container {
+                grid-template-columns: 1fr;
+            }
+            .header {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .contact-info {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -224,7 +396,7 @@
         <header class="header">
             <div class="name-title">
                 <h1>Saransh Lakra</h1>
-                <h2>Web Developer</h2>
+                <h2>Full-Stack Web Developer</h2>
             </div>
             <div class="contact-info">
                 <div>📧 saranshlakra4@gmail.com</div>
@@ -246,6 +418,8 @@
                         <span class="skill-item">JavaScript</span>
                         <span class="skill-item">ReactJS</span>
                         <span class="skill-item">Bootstrap</span>
+                        <span class="skill-item">jQuery</span>
+                        <span class="skill-item">SASS/SCSS</span>
                     </div>
                 </div>
                 
@@ -254,78 +428,116 @@
                     <div class="skill-items">
                         <span class="skill-item">PHP</span>
                         <span class="skill-item">Python</span>
+                        <span class="skill-item">Node.js</span>
                         <span class="skill-item">WordPress</span>
                         <span class="skill-item">Magento</span>
                         <span class="skill-item">Shopify</span>
-                        <span class="skill-item">NodeJs</span>
-                        <span class="skill-item">Custom Plugins</span>
+                        <span class="skill-item">REST API</span>
+                        <span class="skill-item">MySQL</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <div class="skill-name">Tools & Platforms</div>
+                    <div class="skill-name">Microsoft Stack</div>
                     <div class="skill-items">
-                        <span class="skill-item">SharePoint</span>
-                        <span class="skill-item">Power Apps</span>
+                        <span class="skill-item microsoft-item">SharePoint</span>
+                        <span class="skill-item microsoft-item">Power Apps</span>
+                        <span class="skill-item microsoft-item">Excel Macros</span>
+                        <span class="skill-item microsoft-item">Office 365</span>
+                    </div>
+                </div>
+                
+                <div class="skill-category">
+                    <div class="skill-name">Tools & DevOps</div>
+                    <div class="skill-items">
                         <span class="skill-item">Git</span>
+                        <span class="skill-item">Docker</span>
+                        <span class="skill-item">Webpack</span>
+                        <span class="skill-item">NPM</span>
+                        <span class="skill-item">VS Code</span>
+                        <span class="skill-item">Postman</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
                     <div class="skill-name">Web Security & Infrastructure</div>
                     <div class="skill-items">
-                        <span class="skill-item security-item">SSL/TLS Implementation</span>
+                        <span class="skill-item security-item">SSL/TLS</span>
                         <span class="skill-item security-item">Domain Management</span>
                         <span class="skill-item security-item">DNS Configuration</span>
-                        <span class="skill-item security-item">Web Application Security</span>
+                        <span class="skill-item security-item">HTTPS Migration</span>
                         <span class="skill-item security-item">Security Headers</span>
+                        <span class="skill-item security-item">CSP</span>
+                        <span class="skill-item security-item">CORS</span>
                     </div>
                 </div>
                 
                 <div class="skill-category">
-                    <div class="skill-name">Expertise</div>
+                    <div class="skill-name">Standards & Compliance</div>
                     <div class="skill-items">
-                        <span class="skill-item">WCAG 2.0 AA</span>
+                        <span class="skill-item">WCAG 2.0/2.1 AA</span>
                         <span class="skill-item">AODA Compliance</span>
-                        <span class="skill-item">Debugging</span>
-                        <span class="skill-item">Performance Optimization</span>
+                        <span class="skill-item">Responsive Design</span>
+                        <span class="skill-item">Cross-Browser Testing</span>
                     </div>
-                </div>
-            </section>
-            
-            <section class="section">
-                <h3 class="section-title">EDUCATION</h3>
-                
-                <div class="education-item">
-                    <div class="degree">Graduate Certificate in Web Development</div>
-                    <div class="school">Humber College, Toronto, ON</div>
-                    <div class="date">2022</div>
-                    <div class="honors">Dean's List Honours</div>
-                </div>
-                
-                <div class="education-item">
-                    <div class="degree">Bachelor of Technology in Computer Science</div>
-                    <div class="school">MRIU, India</div>
-                    <div class="date">2013 - 2017</div>
                 </div>
             </section>
             
             <section class="section">
                 <h3 class="section-title">TECHNICAL HOBBIES</h3>
-                
-                <div class="hobby-item">
-                    <div class="hobby-title">Electronics Repair</div>
-                    <div class="hobby-description">Component-level troubleshooting and soldering</div>
+                <div class="hobbies">
+                    <div class="hobby-item">Electronics Repair</div>
+                    <div class="hobby-item">Drone Pilot</div>
+                    <div class="hobby-item">Aeromodelling</div>
+                    <div class="hobby-item">IoT Projects</div>
+                </div>
+            </section>
+            
+            <!-- Interactive Games Section -->
+            <section class="games-section">
+                <h3 class="section-title">🎮 INTERACTIVE DEMOS</h3>
+                <div class="game-tabs">
+                    <button class="game-tab active" data-tab="tic-tac-toe">Tic-Tac-Toe</button>
+                    <button class="game-tab" data-tab="memory">Memory</button>
+                    <button class="game-tab" data-tab="color">Color Picker</button>
                 </div>
                 
-                <div class="hobby-item">
-                    <div class="hobby-title">Drone Pilot</div>
-                    <div class="hobby-description">Aerial photography & videography</div>
+                <!-- Tic-Tac-Toe Game -->
+                <div class="game-content active" id="tic-tac-toe">
+                    <div class="game-status" id="gameStatus">Player X's turn</div>
+                    <div class="game-board" id="gameBoard"></div>
+                    <div class="game-controls">
+                        <button class="game-btn" id="resetGame">New Game</button>
+                        <button class="game-btn" id="toggleAI">VS AI: Off</button>
+                    </div>
                 </div>
                 
-                <div class="hobby-item">
-                    <div class="hobby-title">Aeromodelling</div>
-                    <div class="hobby-description">RC aircraft building and piloting</div>
+                <!-- Memory Game -->
+                <div class="game-content" id="memory">
+                    <div class="game-status" id="memoryStatus">Find matching pairs!</div>
+                    <div class="memory-game" id="memoryGame"></div>
+                    <div class="game-controls">
+                        <button class="game-btn" id="resetMemory">Reset Game</button>
+                        <div>Moves: <span id="moveCount">0</span></div>
+                    </div>
+                </div>
+                
+                <!-- Color Picker -->
+                <div class="game-content" id="color">
+                    <div class="color-picker">
+                        <div class="color-display" id="colorDisplay"></div>
+                        <div class="color-sliders">
+                            <div>Red: <span id="redValue">127</span></div>
+                            <input type="range" min="0" max="255" value="127" class="color-slider" id="redSlider">
+                            
+                            <div>Green: <span id="greenValue">127</span></div>
+                            <input type="range" min="0" max="255" value="127" class="color-slider" id="greenSlider">
+                            
+                            <div>Blue: <span id="blueValue">127</span></div>
+                            <input type="range" min="0" max="255" value="127" class="color-slider" id="blueSlider">
+                        </div>
+                        <div class="color-value" id="colorHex">#7f7f7f</div>
+                    </div>
                 </div>
             </section>
         </aside>
@@ -387,23 +599,308 @@
             </section>
             
             <section class="section">
-                <h3 class="section-title">PROFESSIONAL SUMMARY</h3>
-                <p>Detail-oriented Web Developer with 4+ years of experience in front-end development and WordPress customization. Strong background in creating responsive, accessible websites compliant with WCAG 2.0 AA standards. Proven ability to troubleshoot complex technical issues and deliver high-quality web solutions. Excellent collaborator with a passion for continuous learning and innovative problem-solving. Extensive experience in web security implementation, SSL configuration, domain management, and DNS setup.</p>
+                <h3 class="section-title">EDUCATION</h3>
+                
+                <div class="education-item">
+                    <div class="degree">Graduate Certificate in Web Development</div>
+                    <div class="school">Humber College, Toronto, ON</div>
+                    <div class="date">2022</div>
+                    <div class="honors">Dean's List Honours</div>
+                </div>
+                
+                <div class="education-item">
+                    <div class="degree">Bachelor of Technology in Computer Science</div>
+                    <div class="school">MRIU, India</div>
+                    <div class="date">2013 - 2017</div>
+                </div>
             </section>
             
             <section class="section">
-                <h3 class="section-title">KEY ACHIEVEMENTS</h3>
-                <ul class="achievements">
-                    <li>Successfully transitioned from Co-op to full-time Web Developer role through exceptional performance and technical contributions</li>
-                    <li>Graduated with Dean's List honors from Web Development program at Humber College</li>
-                    <li>Developed multiple custom WordPress plugins for client projects, extending functionality and improving user experience</li>
-                    <li>Maintained 100% compliance with accessibility standards across all projects, ensuring inclusive web experiences</li>
-                    <li>Implemented SSL certificates and security measures across 25+ client websites, enhancing security and trust</li>
-                    <li>Reduced website load times by an average of 25% through performance optimization techniques</li>
-                </ul>
+                <h3 class="section-title">PROFESSIONAL SUMMARY</h3>
+                <p>Full-Stack Web Developer with 4+ years of experience specializing in WordPress customization, React development, and Microsoft Power Platform solutions. Strong expertise in creating responsive, accessible websites compliant with WCAG 2.0 AA standards. Proven ability to implement security measures, optimize performance, and deliver high-quality web solutions across multiple platforms and technologies.</p>
             </section>
         </main>
-        <!-- <div class="pdf-note" style="align-items: center; width: 100%;">This is my HTML to PDF Resume</div> -->
     </div>
+
+    <script>
+        // Tab Switching
+        document.querySelectorAll('.game-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.game-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.game-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Tic-Tac-Toe Game Logic
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+        let aiEnabled = false;
+        
+        const statusDisplay = document.getElementById('gameStatus');
+        const gameBoardElement = document.getElementById('gameBoard');
+        const resetButton = document.getElementById('resetGame');
+        const toggleAIButton = document.getElementById('toggleAI');
+        
+        // Winning conditions
+        const winningConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6]             // diagonals
+        ];
+        
+        // Create game board
+        function initializeGame() {
+            gameBoardElement.innerHTML = '';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'game-cell';
+                cell.setAttribute('data-index', i);
+                cell.addEventListener('click', handleCellClick);
+                gameBoardElement.appendChild(cell);
+            }
+        }
+        
+        // Handle cell click
+        function handleCellClick(event) {
+            const clickedCell = event.target;
+            const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+            
+            if (gameBoard[clickedCellIndex] !== '' || !gameActive) {
+                return;
+            }
+            
+            // Player move
+            makeMove(clickedCellIndex, currentPlayer);
+            clickedCell.textContent = currentPlayer;
+            
+            checkResult();
+            
+            // AI move if enabled
+            if (gameActive && aiEnabled && currentPlayer === 'O') {
+                setTimeout(makeAIMove, 500);
+            }
+        }
+        
+        function makeMove(index, player) {
+            gameBoard[index] = player;
+        }
+        
+        function makeAIMove() {
+            // Simple AI - find first available spot
+            const availableSpots = gameBoard.map((spot, index) => spot === '' ? index : null).filter(val => val !== null);
+            if (availableSpots.length > 0) {
+                const randomIndex = Math.floor(Math.random() * availableSpots.length);
+                const aiMove = availableSpots[randomIndex];
+                
+                makeMove(aiMove, 'O');
+                document.querySelector(`.game-cell[data-index="${aiMove}"]`).textContent = 'O';
+                
+                checkResult();
+            }
+        }
+        
+        // Check for win or draw
+        function checkResult() {
+            let roundWon = false;
+            
+            for (let i = 0; i < winningConditions.length; i++) {
+                const [a, b, c] = winningConditions[i];
+                if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    roundWon = true;
+                    break;
+                }
+            }
+            
+            if (roundWon) {
+                statusDisplay.textContent = `Player ${currentPlayer} wins!`;
+                gameActive = false;
+                return;
+            }
+            
+            const roundDraw = !gameBoard.includes('');
+            if (roundDraw) {
+                statusDisplay.textContent = 'Game ended in a draw!';
+                gameActive = false;
+                return;
+            }
+            
+            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+            statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+        }
+        
+        // Reset game
+        function resetGame() {
+            currentPlayer = 'X';
+            gameBoard = ['', '', '', '', '', '', '', '', ''];
+            gameActive = true;
+            statusDisplay.textContent = `Player ${currentPlayer}'s turn`;
+            
+            const cells = document.querySelectorAll('.game-cell');
+            cells.forEach(cell => {
+                cell.textContent = '';
+            });
+        }
+        
+        // Toggle AI
+        toggleAIButton.addEventListener('click', function() {
+            aiEnabled = !aiEnabled;
+            toggleAIButton.textContent = `VS AI: ${aiEnabled ? 'On' : 'Off'}`;
+            resetGame();
+        });
+        
+        // Memory Game Logic
+        const memoryGameElement = document.getElementById('memoryGame');
+        const memoryStatus = document.getElementById('memoryStatus');
+        const resetMemoryButton = document.getElementById('resetMemory');
+        const moveCountElement = document.getElementById('moveCount');
+        
+        let memoryCards = [];
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let moveCount = 0;
+        let memoryGameActive = true;
+        
+        // Card symbols
+        const symbols = ['🌟', '🚀', '💻', '🎮', '🔧', '📱', '💡', '⚡'];
+        
+        function initializeMemoryGame() {
+            memoryGameElement.innerHTML = '';
+            memoryCards = [];
+            flippedCards = [];
+            matchedPairs = 0;
+            moveCount = 0;
+            memoryGameActive = true;
+            moveCountElement.textContent = '0';
+            memoryStatus.textContent = 'Find all matching pairs!';
+            
+            // Duplicate symbols for pairs
+            let cardSymbols = [...symbols, ...symbols];
+            
+            // Shuffle cards
+            cardSymbols.sort(() => Math.random() - 0.5);
+            
+            // Create cards
+            cardSymbols.forEach((symbol, index) => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.setAttribute('data-index', index);
+                card.setAttribute('data-symbol', symbol);
+                card.textContent = '?';
+                card.addEventListener('click', handleMemoryCardClick);
+                memoryGameElement.appendChild(card);
+                memoryCards.push({
+                    element: card,
+                    symbol: symbol,
+                    flipped: false,
+                    matched: false
+                });
+            });
+        }
+        
+        function handleMemoryCardClick(event) {
+            if (!memoryGameActive) return;
+            
+            const clickedCard = event.target;
+            const cardIndex = parseInt(clickedCard.getAttribute('data-index'));
+            const card = memoryCards[cardIndex];
+            
+            if (card.flipped || card.matched || flippedCards.length >= 2) {
+                return;
+            }
+            
+            // Flip card
+            card.flipped = true;
+            clickedCard.textContent = card.symbol;
+            clickedCard.classList.add('flipped');
+            flippedCards.push(card);
+            
+            // Check for match if two cards are flipped
+            if (flippedCards.length === 2) {
+                moveCount++;
+                moveCountElement.textContent = moveCount;
+                
+                const [card1, card2] = flippedCards;
+                
+                if (card1.symbol === card2.symbol) {
+                    // Match found
+                    card1.matched = true;
+                    card2.matched = true;
+                    card1.element.classList.add('matched');
+                    card2.element.classList.add('matched');
+                    matchedPairs++;
+                    
+                    if (matchedPairs === symbols.length) {
+                        memoryStatus.textContent = `You won in ${moveCount} moves!`;
+                        memoryGameActive = false;
+                    } else {
+                        memoryStatus.textContent = 'Match found! Keep going!';
+                    }
+                    
+                    flippedCards = [];
+                } else {
+                    // No match
+                    memoryStatus.textContent = 'Try again!';
+                    memoryGameActive = false;
+                    
+                    setTimeout(() => {
+                        card1.flipped = false;
+                        card2.flipped = false;
+                        card1.element.textContent = '?';
+                        card2.element.textContent = '?';
+                        card1.element.classList.remove('flipped');
+                        card2.element.classList.remove('flipped');
+                        flippedCards = [];
+                        memoryGameActive = true;
+                        memoryStatus.textContent = 'Find all matching pairs!';
+                    }, 1000);
+                }
+            }
+        }
+        
+        // Color Picker Logic
+        const redSlider = document.getElementById('redSlider');
+        const greenSlider = document.getElementById('greenSlider');
+        const blueSlider = document.getElementById('blueSlider');
+        const redValue = document.getElementById('redValue');
+        const greenValue = document.getElementById('greenValue');
+        const blueValue = document.getElementById('blueValue');
+        const colorDisplay = document.getElementById('colorDisplay');
+        const colorHex = document.getElementById('colorHex');
+        
+        function updateColor() {
+            const r = redSlider.value;
+            const g = greenSlider.value;
+            const b = blueSlider.value;
+            
+            redValue.textContent = r;
+            greenValue.textContent = g;
+            blueValue.textContent = b;
+            
+            const hexColor = `#${parseInt(r).toString(16).padStart(2, '0')}${parseInt(g).toString(16).padStart(2, '0')}${parseInt(b).toString(16).padStart(2, '0')}`;
+            
+            colorDisplay.style.background = `rgb(${r}, ${g}, ${b})`;
+            colorHex.textContent = hexColor;
+        }
+        
+        // Event listeners for color sliders
+        [redSlider, greenSlider, blueSlider].forEach(slider => {
+            slider.addEventListener('input', updateColor);
+        });
+        
+        // Initialize everything
+        initializeGame();
+        resetButton.addEventListener('click', resetGame);
+        
+        initializeMemoryGame();
+        resetMemoryButton.addEventListener('click', initializeMemoryGame);
+        
+        updateColor();
+    </script>
 </body>
 </html>
